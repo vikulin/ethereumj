@@ -51,15 +51,15 @@ public class PrivateMinerSample {
                 "peer.discovery.enabled = false \n" +
                 "peer.listen.port = 30335 \n" +
                  // need to have different nodeId's for the peers
-                "peer.privateKey = 6ef8da380c27cea8fdf7448340ea99e8e2268fc2950d79ed47cbf6f85dc977ec \n" +
+                "peer.privateKey = 0a420d35201abb3a3b71fa6d99f4a7640f79bbb11e2a0fc5fc2bbdb6a78c518f \n" +
                 // our private net ID
-                "peer.networkId = 555 \n" +
+                "peer.networkId = 11 \n" +
                 // we have no peers to sync with
                 "sync.enabled = false \n" +
                 // genesis with a lower initial difficulty and some predefined known funded accounts
-                "genesis = sample-genesis.json \n" +
+                "genesis = aquarium.json \n" +
                 // two peers need to have separate database dirs
-                "database.dir = sampleDB-1 \n" +
+                "database.dir = aquariumDB-1 \n" +
                 // when more than 1 miner exist on the network extraData helps to identify the block creator
                 "mine.extraDataHex = cccccccccccccccccccc \n" +
                 "mine.cpuMineThreads = 2 \n" +
@@ -145,17 +145,17 @@ public class PrivateMinerSample {
                 // no discovery: we are connecting directly to the miner peer
                 "peer.discovery.enabled = false \n" +
                 "peer.listen.port = 30336 \n" +
-                "peer.privateKey = 3ec771c31cac8c0dba77a69e503765701d3c2bb62435888d4ffa38fed60c445c \n" +
-                "peer.networkId = 555 \n" +
+                "peer.privateKey = 29e6a2e291afcc73e73fb1ef48b06d2aaa23ef428c600505cd3f3c544814e6ff \n" +
+                "peer.networkId = 11 \n" +
                 // actively connecting to the miner
                 "peer.active = [" +
-                "    { url = 'enode://26ba1aadaf59d7607ad7f437146927d79e80312f026cfa635c6b2ccf2c5d3521f5812ca2beb3b295b14f97110e6448c1c7ff68f14c5328d43a3c62b44143e9b1@localhost:30335' }" +
+                "    { url = 'enode://b80c3a39edc0421fe637bd47f28288e0e781bca7ee28565cd54cc1ed8e3a6d96c3c796558786a11aeacae44f1732daf7d48c628fabc23c7ce9b9c70bded325db@localhost:30335' }" +
                 "] \n" +
                 "sync.enabled = true \n" +
                 // all peers in the same network need to use the same genesis block
-                "genesis = sample-genesis.json \n" +
+                "genesis = aquarium.json \n" +
                 // two peers need to have separate database dirs
-                "database.dir = sampleDB-2 \n";
+                "database.dir = aquriumDB-2 \n";
 
         @Bean
         public RegularNode node() {
@@ -206,7 +206,7 @@ public class PrivateMinerSample {
             logger.info("Start generating transactions...");
 
             // the sender which some coins from the genesis
-            ECKey senderKey = ECKey.fromPrivate(Hex.decode("6ef8da380c27cea8fdf7448340ea99e8e2268fc2950d79ed47cbf6f85dc977ec"));
+            ECKey senderKey = ECKey.fromPrivate(Hex.decode("29e6a2e291afcc73e73fb1ef48b06d2aaa23ef428c600505cd3f3c544814e6ff"));
             byte[] receiverAddr = Hex.decode("5db10750e8caff27f906b41c71b3471057dd2004");
 
             for (int i = ethereum.getRepository().getNonce(senderKey.getAddress()).intValue(), j = 0; j < 20000; i++, j++) {

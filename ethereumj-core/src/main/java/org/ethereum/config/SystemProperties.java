@@ -371,6 +371,9 @@ public class SystemProperties {
                         case "testnet":
                             blockchainConfig = new TestNetConfig();
                             break;
+                        case "aquarium":
+                            blockchainConfig = new AquariumNetConfig();
+                            break;
                         default:
                             throw new RuntimeException("Unknown value for 'blockchain.config.name': '" + config.getString("blockchain.config.name") + "'");
                     }
