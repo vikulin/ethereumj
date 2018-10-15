@@ -223,16 +223,6 @@ public class Block {
         return this.header.getDifficultyBI();
     }
 
-
-    public BigInteger getCumulativeDifficulty() {
-        parseRLP();
-        BigInteger calcDifficulty = new BigInteger(1, this.header.getDifficulty());
-        for (BlockHeader uncle : uncleList) {
-            calcDifficulty = calcDifficulty.add(new BigInteger(1, uncle.getDifficulty()));
-        }
-        return calcDifficulty;
-    }
-
     public long getTimestamp() {
         parseRLP();
         return this.header.getTimestamp();
