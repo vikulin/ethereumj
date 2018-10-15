@@ -369,8 +369,7 @@ public class BlockHeader {
     }
 
     public BigInteger calcDifficulty(BlockchainNetConfig config, BlockHeader parent) {
-        return config.getConfigForBlock(getNumber()).
-                calcDifficulty(this, parent);
+        return parent.getDifficultyBI();
     }
 
     public boolean hasUncles() {

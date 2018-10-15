@@ -84,7 +84,7 @@ public class Eip150HFConfig implements BlockchainConfig, BlockchainNetConfig {
 
     @Override
     public BigInteger calcDifficulty(BlockHeader curBlock, BlockHeader parent) {
-        return this.parent.calcDifficulty(curBlock, parent);
+        return BigInteger.ONE;
     }
 
     @Override

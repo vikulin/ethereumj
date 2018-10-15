@@ -513,7 +513,7 @@ public class Eth62 extends EthHandler {
 
         logger.debug("New block received: block.index [{}]", newBlock.getNumber());
 
-        updateTotalDifficulty(newBlockMessage.getDifficultyAsBigInt());
+        updateTotalDifficulty(BigInteger.ONE);
 
         updateBestBlock(newBlock);
 

@@ -108,11 +108,8 @@ public class MigrateHeaderSourceTotalDiff implements Runnable {
             DbSource<byte[]> headerDbSource = (DbSource<byte[]>) ctx.getBean("headerSource");
             ObjectDataSource<BlockHeader> objectDataSource = new ObjectDataSource<>(headerDbSource, Serializers.BlockHeaderSerializer, 0);
             DataSourceArray<BlockHeader> headerSource = new DataSourceArray<>(objectDataSource);
-            BigInteger totalDifficulty = blockStore.getChainBlockByNumber(0).getDifficultyBI();
-            for (int i = 1; i < firstFullBlockNum; ++i) {
-                totalDifficulty = totalDifficulty.add(headerSource.get(i).getDifficultyBI());
-            }
-            blockStore.saveBlock(firstFullBlock, totalDifficulty.add(firstFullBlock.getDifficultyBI()), true);
+            //BigInteger totalDifficulty = blockStore.getChainBlockByNumber(0).getDifficultyBI();
+            blockStore.saveBlock(firstFullBlock, BigInteger.ONE, true);
             ((BlockchainImpl) blockchain).updateBlockTotDifficulties(firstFullBlockNum + 1);
             logger.info("Total difficulty updated");
             logger.info("Migrating headerStore");

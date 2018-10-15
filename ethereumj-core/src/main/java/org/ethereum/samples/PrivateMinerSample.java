@@ -63,7 +63,8 @@ public class PrivateMinerSample {
                 // when more than 1 miner exist on the network extraData helps to identify the block creator
                 "mine.extraDataHex = cccccccccccccccccccc \n" +
                 "mine.cpuMineThreads = 2 \n" +
-                "cache.flush.blocks = 1";
+                "cache.flush.blocks = 1 \n" +
+                "mine.fullDataSet = false";
 
         @Bean
         public MinerNode node() {
@@ -155,7 +156,7 @@ public class PrivateMinerSample {
                 // all peers in the same network need to use the same genesis block
                 "genesis = aquarium.json \n" +
                 // two peers need to have separate database dirs
-                "database.dir = aquriumDB-2 \n";
+                "database.dir = aquariumDB-2 \n";
 
         @Bean
         public RegularNode node() {

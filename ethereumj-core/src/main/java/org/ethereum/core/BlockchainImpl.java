@@ -1058,7 +1058,7 @@ public class BlockchainImpl implements Blockchain, org.ethereum.facade.Blockchai
 
     @Override
     public synchronized void updateTotalDifficulty(Block block) {
-        totalDifficulty = totalDifficulty.add(block.getDifficultyBI());
+        totalDifficulty = BigInteger.ONE;
         logger.debug("TD: updated to {}", totalDifficulty);
     }
 
@@ -1125,7 +1125,7 @@ public class BlockchainImpl implements Blockchain, org.ethereum.facade.Blockchai
                         for (Block block : blocks) {
                             BigInteger td = blockStore.getTotalDifficultyForHash(block.getHash());
                             if (maxTD.compareTo(td) < 0) {
-                                maxTD = td;
+                                //maxTD = td;
                                 bestStoredBlock = block;
                             }
                         }
@@ -1134,7 +1134,7 @@ public class BlockchainImpl implements Blockchain, org.ethereum.facade.Blockchai
                     if (totalDifficulty.compareTo(maxTD) < 0)  {
                         blockStore.reBranch(bestStoredBlock);
                         bestBlock = bestStoredBlock;
-                        totalDifficulty = maxTD;
+                        //totalDifficulty = maxTD;
                         repository = repository.getSnapshotTo(bestBlock.getStateRoot());
 
                         logger.info("totDifficulties update: re-branch to block {}, totalDifficulty {}",

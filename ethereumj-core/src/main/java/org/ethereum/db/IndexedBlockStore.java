@@ -199,52 +199,17 @@ public class IndexedBlockStore extends AbstractBlockstore{
 
     @Override
     public synchronized BigInteger getTotalDifficultyForHash(byte[] hash){
-        Block block = this.getBlockByHash(hash);
-        if (block == null) return ZERO;
-
-        Long level  =  block.getNumber();
-        List<BlockInfo> blockInfos =  index.get(level.intValue());
-        for (BlockInfo blockInfo : blockInfos)
-                 if (areEqual(blockInfo.getHash(), hash)) {
-                     return blockInfo.totalDifficulty;
-                 }
-
-        return ZERO;
+        return BigInteger.ONE;
     }
 
 
     @Override
     public synchronized BigInteger getTotalDifficulty(){
-        long maxNumber = getMaxNumber();
-
-        List<BlockInfo> blockInfos = index.get((int) maxNumber);
-        for (BlockInfo blockInfo : blockInfos){
-            if (blockInfo.isMainChain()){
-                return blockInfo.getTotalDifficulty();
-            }
-        }
-
-        while (true){
-            --maxNumber;
-            List<BlockInfo> infos = getBlockInfoForLevel(maxNumber);
-
-            for (BlockInfo blockInfo : infos) {
-                if (blockInfo.isMainChain()) {
-                    return blockInfo.getTotalDifficulty();
-                }
-            }
-        }
+        return BigInteger.ONE;
     }
 
     public synchronized void updateTotDifficulties(long index) {
-        List<BlockInfo> level = getBlockInfoForLevel(index);
-        for (BlockInfo blockInfo : level) {
-            Block block = getBlockByHash(blockInfo.getHash());
-            List<BlockInfo> parentInfos = getBlockInfoForLevel(index - 1);
-            BlockInfo parentInfo = getBlockInfoForHash(parentInfos, block.getParentHash());
-            blockInfo.setTotalDifficulty(parentInfo.getTotalDifficulty().add(block.getDifficultyBI()));
-        }
-        this.index.set((int) index, level);
+
     }
 
     @Override
@@ -460,7 +425,7 @@ public class IndexedBlockStore extends AbstractBlockstore{
                 byte[] rlpHash = rlpBlock.get(0).getRLPData();
                 blockInfo.setHash(rlpHash == null ? new byte[0] : rlpHash);
                 byte[] rlpTotalDiff = rlpBlock.get(1).getRLPData();
-                blockInfo.setTotalDifficulty(rlpTotalDiff == null ? BigInteger.ZERO : ByteUtil.bytesToBigInteger(rlpTotalDiff));
+                blockInfo.setTotalDifficulty(BigInteger.ONE);
                 blockInfo.setMainChain(ByteUtil.byteArrayToInt(rlpBlock.get(2).getRLPData()) == 1);
                 blockInfoList.add(blockInfo);
             }

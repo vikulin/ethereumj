@@ -216,6 +216,11 @@ public class ByteUtil {
         return data == null ? "" : Hex.toHexString(data);
     }
 
+    public static void main(String [] args){
+        BigInteger toHex=new BigInteger("1");
+        System.out.println(toHex);
+    }
+
     /**
      * Calculate packet length
      *

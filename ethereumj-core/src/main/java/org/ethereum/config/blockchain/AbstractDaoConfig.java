@@ -78,7 +78,7 @@ public abstract class AbstractDaoConfig extends FrontierConfig {
 
     @Override
     public BigInteger calcDifficulty(BlockHeader curBlock, BlockHeader parent) {
-        return this.parent.calcDifficulty(curBlock, parent);
+        return BigInteger.ONE;
     }
 
     @Override
