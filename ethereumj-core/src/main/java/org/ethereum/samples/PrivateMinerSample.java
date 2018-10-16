@@ -48,7 +48,7 @@ public class PrivateMinerSample {
 
         private final String config =
                 // no need for discovery in that small network
-                "peer.discovery.enabled = false \n" +
+                "peer.discovery.enabled = true \n" +
                 "peer.listen.port = 30335 \n" +
                  // need to have different nodeId's for the peers
                 "peer.privateKey = 0a420d35201abb3a3b71fa6d99f4a7640f79bbb11e2a0fc5fc2bbdb6a78c518f \n" +
@@ -148,10 +148,7 @@ public class PrivateMinerSample {
                 "peer.listen.port = 30336 \n" +
                 "peer.privateKey = 29e6a2e291afcc73e73fb1ef48b06d2aaa23ef428c600505cd3f3c544814e6ff \n" +
                 "peer.networkId = 11 \n" +
-                // actively connecting to the miner
-                "peer.active = [" +
-                "    { url = 'enode://b80c3a39edc0421fe637bd47f28288e0e781bca7ee28565cd54cc1ed8e3a6d96c3c796558786a11aeacae44f1732daf7d48c628fabc23c7ce9b9c70bded325db@localhost:30335' }" +
-                "] \n" +
+                "peer.discovery.ip.list = [\"127.0.0.1:30335\"] \n"+
                 "sync.enabled = true \n" +
                 // all peers in the same network need to use the same genesis block
                 "genesis = aquarium.json \n" +
